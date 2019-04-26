@@ -1,5 +1,4 @@
 <view>
-  <button bindtap="searchCounters">查询counters</button>
   <table wx:for="{{ list }}">
     <tbody>
       <tr><td class="label">_id: </td><td class="value">{{ item._id }}</td></tr>
@@ -9,5 +8,11 @@
       <tr><td class="label">filed2: </td><td class="value">{{ item.filed2 }}</td></tr>
     </tbody>
   </table>
+  <button bindtap="searchCounters">云函数调用数据库</button>
+  <view>{{ httpReqData }}</view>
+  <button bindtap="requestHttp">前台直接查询http外部接口</button>
+
+  <view>{{ cloudHttpReqData }}</view>
+  <button bindtap="cloudRequestHttp">云函数查询外部http接口</button>
 </view>
 

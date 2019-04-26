@@ -24,6 +24,16 @@
       <image class="uploader-image" src="{{imgUrl}}" mode="aspectFit" bindtap="previewImg"></image>
     </view>
   </view>
+  <view>
+    <button bindtap="downloadImg">下载图片</button>
+  </view>
+  <view>
+    <button bindtap="getImgUrl">获取图片</button>
+  </view>
+
+  <view>
+    <button bindtap="timingStart">启动定时器</button>
+  </view>
 
 
   <!-- 操作数据库 -->
@@ -36,7 +46,7 @@
   <!-- 后端操作数据库 -->
   <view class="uploader">
     <navigator url="../funcAndDb/funcAndDb" open-type="navigate" class="uploader-text">
-      <text>前端操作云函数，云函数操作数据库</text>
+      <text>相关请求类型</text>
     </navigator>
   </view>
 

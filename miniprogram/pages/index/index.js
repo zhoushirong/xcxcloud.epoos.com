@@ -66,7 +66,50 @@ Page({
       }
     })
   },
-
+  timingStart: function() {
+    wx.cloud.callFunction({
+      name: 'timing',
+      data: {},
+      success: res => {
+        wx.showToast({
+          title: '调用成功',
+        })
+        console.log(res)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '调用失败',
+        })
+        console.error('[云函数] [timing] 调用失败：', err)
+      }
+    })
+  },
+  downloadImg: function() {
+    let fileID = 'cloud://epoos-cloud-server-ccokv.6570-epoos-cloud-server-ccokv/my-image.jpeg'
+    wx.cloud.downloadFile({
+      fileID: fileID
+    }).then(res => {
+      // get temp file path
+      console.log(res.tempFilePath)
+    }).catch(error => {
+      // handle error
+    })
+  },
+  getImgUrl: function() {
+    let fileID = 'cloud://epoos-cloud-server-ccokv.6570-epoos-cloud-server-ccokv/wxacode_default_openapi_page.jpeg'
+    wx.cloud.getTempFileURL({
+      fileList: [{
+        fileID: fileID,
+        maxAge: 60 * 60, // one hour
+      }]
+    }).then(res => {
+      // get temp file URL
+      console.log(res.fileList)
+    }).catch(error => {
+      // handle error
+    })
+  },
   // 上传图片
   doUpload: function () {
     // 选择图片
@@ -81,9 +124,10 @@ Page({
         })
 
         const filePath = res.tempFilePaths[0]
-        
+        console.log('filePath:',filePath)
         // 上传图片
         const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
+        console.log('cloudPath:',cloudPath)
         wx.cloud.uploadFile({
           cloudPath,
           filePath,
@@ -116,5 +160,4 @@ Page({
       }
     })
   },
-
 })
